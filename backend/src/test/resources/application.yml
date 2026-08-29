@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:meridianops-test;MODE=MySQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  graphql:
+    graphiql:
+      enabled: false
+
+meridianops:
+  jwt:
+    secret: test-secret-key-must-be-at-least-32-bytes!!
+    expiration-ms: 3600000

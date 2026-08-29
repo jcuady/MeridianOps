@@ -1,0 +1,30 @@
+# Env / secrets
+.env
+*.env.local
+
+# Java / Maven
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+*.iml
+.idea/
+*.log
+
+# Node / Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.cache/
+*.tsbuildinfo
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+*~
+
+# Docker volumes
+mysql_data/

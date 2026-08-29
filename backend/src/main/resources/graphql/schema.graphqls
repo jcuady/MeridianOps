@@ -1,0 +1,28 @@
+type Ticket {
+  id: ID!
+  title: String!
+  description: String
+  status: String!
+  priority: String!
+  assignee: String
+  createdAt: String
+  updatedAt: String
+}
+
+type InventoryItem {
+  id: ID!
+  sku: String!
+  name: String!
+  quantity: Int!
+  location: String
+  unitCost: Float
+  updatedAt: String
+}
+
+type Query {
+  tickets: [Ticket!]!
+  ticket(id: ID!): Ticket
+  inventoryItems: [InventoryItem!]!
+  inventoryItem(id: ID!): InventoryItem
+  inventoryItemBySku(sku: String!): InventoryItem
+}
