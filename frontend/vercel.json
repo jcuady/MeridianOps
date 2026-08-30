@@ -1,0 +1,6 @@
+{
+  "buildCommand": "npm ci && npm run build",
+  "outputDirectory": "dist/meridianops-frontend/browser",
+  "framework": null,
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
