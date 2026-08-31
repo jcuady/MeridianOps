@@ -15,10 +15,10 @@ spring:
         format_sql: true
   h2:
     console:
-      enabled: true
+      enabled: ${H2_CONSOLE_ENABLED:false}
   graphql:
     graphiql:
-      enabled: true
+      enabled: ${GRAPHIQL_ENABLED:true}
     path: /graphql
 
 server:

@@ -16,6 +16,10 @@ services:
         generateValue: true
       - key: CORS_ORIGINS
         sync: false
+      - key: H2_CONSOLE_ENABLED
+        value: "false"
+      - key: GRAPHIQL_ENABLED
+        value: "true"
       - key: SPRING_DATASOURCE_URL
         value: jdbc:h2:mem:meridianops;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
       - key: SPRING_DATASOURCE_USERNAME
