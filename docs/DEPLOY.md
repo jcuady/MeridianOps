@@ -1,40 +1,31 @@
-# MeridianOps deploy
+﻿# MeridianOps deploy
 
-## API (Render)
+## Live smoke (this machine session)
 
-Blueprint: [`../render.yaml`](../render.yaml) at repo root.
+| Surface | URL | Notes |
+|---------|-----|-------|
+| SPA | https://jcuady.github.io/MeridianOps/ | GitHub Pages |
+| API (tunnel) | https://plasma-listed-dirt-breeding.trycloudflare.com | Cloudflare quick tunnel to local JAR; ephemeral |
+| Demo login | username `ops` / password `ops123` | Seeded by DataSeeder |
 
-1. Render Dashboard -> New -> Blueprint -> `jcuady/MeridianOps`
-2. Free web service builds `backend/Dockerfile` (H2 in-memory for demo)
-3. After the SPA is live, set `CORS_ORIGINS` to the Vercel origin (no trailing slash)
-4. Health: `GET /api/health`
+Health: `GET {API}/api/health` -> `{"status":"UP"}`
 
-API hostname used by the SPA prod env: `https://meridianops-api.onrender.com`  
-(Update `frontend/src/environments/environment.prod.ts` if Render assigns a different URL.)
+## API (Render permanent)
 
-## SPA (Vercel)
+Blueprint: repo-root `render.yaml`.
 
-Root directory: `frontend/`  
-Config: [`vercel.json`](vercel.json) (`npm ci && npm run build`, output `dist/meridianops-frontend/browser`)
+1. https://render.com/deploy?repo=https://github.com/jcuady/MeridianOps
+2. Set `CORS_ORIGINS=https://jcuady.github.io`
+3. After deploy, update `frontend/src/environments/environment.prod.ts` API host and redeploy Pages / Vercel
 
-1. Vercel -> Add New Project -> Import `jcuady/MeridianOps`
-2. Grant the Vercel GitHub App access to this repo if the import list is empty
-3. Set Root Directory to `frontend`
-4. Deploy
+## SPA
 
-Smoke project already created on the team: **meridianops-spa**  
-Preview: https://meridianops-spa-jcuadys-projects.vercel.app  
+- GitHub Pages: `gh-pages` branch (auto)
+- Vercel: import `jcuady/MeridianOps`, root `frontend/` (grant GitHub App)
 
-After Render API is up, set `CORS_ORIGINS` to that Vercel origin and (optionally) re-point `environment.prod.ts` if the hostname differs from `meridianops-api.onrender.com`.
-
-Local verify:
+## Local
 
 ```bash
-cd frontend
-npm ci
-npm run build
+cd backend && mvn -DskipTests package && java -jar target/meridianops-backend-0.1.0.jar
+cd frontend && npm ci && npm start
 ```
-
-## CI
-
-`_deploy_local/ci.yml` -- Angular build + Maven test/package. Copy to `.github/workflows/ci.yml` after `gh auth refresh -s workflow`.
