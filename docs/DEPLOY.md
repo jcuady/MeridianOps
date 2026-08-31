@@ -22,6 +22,11 @@ Config: [`vercel.json`](vercel.json) (`npm ci && npm run build`, output `dist/me
 3. Set Root Directory to `frontend`
 4. Deploy
 
+Smoke project already created on the team: **meridianops-spa**  
+Preview: https://meridianops-spa-jcuadys-projects.vercel.app  
+
+After Render API is up, set `CORS_ORIGINS` to that Vercel origin and (optionally) re-point `environment.prod.ts` if the hostname differs from `meridianops-api.onrender.com`.
+
 Local verify:
 
 ```bash
