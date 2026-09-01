@@ -1,5 +1,7 @@
-﻿export const environment = {
+export const environment = {
   production: true,
-  apiBaseUrl: 'https://meridianops-api.onrender.com',
-  graphqlUrl: 'https://meridianops-api.onrender.com/graphql',
+  // Ephemeral Cloudflare quick tunnel for live smoke (restart updates this).
+  // Permanent target after Render: https://meridianops-api.onrender.com
+  apiBaseUrl: 'https://plasma-listed-dirt-breeding.trycloudflare.com',
+  graphqlUrl: 'https://plasma-listed-dirt-breeding.trycloudflare.com/graphql',
 };

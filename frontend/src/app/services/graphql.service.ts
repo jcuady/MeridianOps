@@ -5,12 +5,15 @@ import { environment } from '../../environments/environment';
 
 import { AuthService } from './auth.service';
 
+export type TicketStatus = 'OPEN' | 'IN_PROGRESS' | 'RESOLVED' | 'CLOSED';
+export type TicketPriority = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+
 export interface Ticket {
   id: string;
   title: string;
   description?: string;
-  status: string;
-  priority: string;
+  status: TicketStatus;
+  priority: TicketPriority;
   assignee?: string;
   createdAt?: string;
   updatedAt?: string;

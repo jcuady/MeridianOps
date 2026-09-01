@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <header class="topbar">
-      <a routerLink="/tickets" class="brand">MeridianOps</a>
+      <a routerLink="/tickets" class="brand">
+        <span class="material-symbols-outlined logo-icon">webhook</span>
+        MeridianOps
+      </a>
       <nav>
-        <a routerLink="/tickets">Tickets</a>
-        <a routerLink="/inventory">Inventory</a>
-        <a routerLink="/login">Login</a>
+        <a routerLink="/tickets" routerLinkActive="active">Tickets</a>
+        <a routerLink="/inventory" routerLinkActive="active">Inventory</a>
+        <a routerLink="/login" routerLinkActive="active">Login</a>
       </nav>
     </header>
     <main class="page">

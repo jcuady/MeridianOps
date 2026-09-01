@@ -9,21 +9,39 @@ import { AuthService } from '../services/auth.service';
   imports: [FormsModule],
   template: `
     <section class="panel narrow">
-      <h1>Sign in</h1>
-      <p class="muted">Demo user: ops / ops123</p>
+      <div class="panel-header" style="justify-content: center; margin-bottom: 2rem;">
+        <div style="text-align: center;">
+          <span class="material-symbols-outlined" style="font-size: 3rem; color: var(--accent); margin-bottom: 0.5rem;">lock_person</span>
+          <h1>Welcome Back</h1>
+          <p class="muted">Demo user: ops / ops123</p>
+        </div>
+      </div>
+      
       <label>
         Username
-        <input [(ngModel)]="username" name="username" autocomplete="username" />
+        <input [(ngModel)]="username" name="username" autocomplete="username" placeholder="Enter username" />
       </label>
+      
       <label>
         Password
-        <input [(ngModel)]="password" name="password" type="password" autocomplete="current-password" />
+        <input [(ngModel)]="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
       </label>
+      
       @if (error()) {
-        <p class="error">{{ error() }}</p>
+        <div class="error">
+          <span class="material-symbols-outlined">error</span>
+          {{ error() }}
+        </div>
       }
-      <button type="button" (click)="submit()" [disabled]="loading()">
-        {{ loading() ? 'Signing in...' : 'Login' }}
+      
+      <button type="button" (click)="submit()" [disabled]="loading()" style="width: 100%; margin-top: 1rem;">
+        @if (loading()) {
+          <span class="material-symbols-outlined spinner">progress_activity</span>
+          Signing in...
+        } @else {
+          <span class="material-symbols-outlined">login</span>
+          Sign In
+        }
       </button>
     </section>
   `
