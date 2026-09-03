@@ -8,7 +8,6 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -40,7 +39,6 @@ public class InventoryGraphQlController {
         InventoryItem item = inventoryItemRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Inventory item not found"));
         item.setQuantity(quantity);
-        item.setUpdatedAt(LocalDateTime.now());
         return inventoryItemRepository.save(item);
     }
 

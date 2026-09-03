@@ -91,12 +91,21 @@ mvn spring-boot:run
 | REST | `POST /api/auth/login` | Returns JWT |
 | GraphQL | `POST /graphql` | Requires `Authorization: Bearer <token>` |
 
-Example GraphQL:
+Example GraphQL Queries:
 
 ```graphql
 query {
   tickets { id title status priority }
   inventoryItems { sku name quantity location }
+}
+```
+
+Example GraphQL Mutations:
+
+```graphql
+mutation {
+  updateTicketStatus(id: "1", status: "IN_PROGRESS") { id status }
+  updateInventoryQuantity(id: "1", quantity: 50) { id quantity }
 }
 ```
 
