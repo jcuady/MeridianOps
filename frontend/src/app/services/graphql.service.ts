@@ -83,4 +83,38 @@ export class GraphqlService {
       )
       .pipe(map((res) => res.data.inventoryItems));
   }
+
+  updateTicketStatus(id: string, status: string): Observable<Ticket> {
+    const query = `
+      mutation {
+        updateTicketStatus(id: "${id}", status: "${status}") {
+          id title description status priority assignee createdAt updatedAt
+        }
+      }
+    `;
+    return this.http
+      .post<GraphqlResponse<{ updateTicketStatus: Ticket }>>(
+        environment.graphqlUrl,
+        { query },
+        { headers: this.headers() }
+      )
+      .pipe(map((res) => res.data.updateTicketStatus));
+  }
+
+  updateInventoryQuantity(id: string, quantity: number): Observable<InventoryItem> {
+    const query = `
+      mutation {
+        updateInventoryQuantity(id: "${id}", quantity: ${quantity}) {
+          id sku name quantity location unitCost updatedAt
+        }
+      }
+    `;
+    return this.http
+      .post<GraphqlResponse<{ updateInventoryQuantity: InventoryItem }>>(
+        environment.graphqlUrl,
+        { query },
+        { headers: this.headers() }
+      )
+      .pipe(map((res) => res.data.updateInventoryQuantity));
+  }
 }

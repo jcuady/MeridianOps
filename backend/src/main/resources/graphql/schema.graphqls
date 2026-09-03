@@ -26,3 +26,8 @@ type Query {
   inventoryItem(id: ID!): InventoryItem
   inventoryItemBySku(sku: String!): InventoryItem
 }
+
+type Mutation {
+  updateTicketStatus(id: ID!, status: String!): Ticket
+  updateInventoryQuantity(id: ID!, quantity: Int!): InventoryItem
+}

@@ -3,10 +3,12 @@ package com.meridianops.controller;
 import com.meridianops.entity.InventoryItem;
 import com.meridianops.repository.InventoryItemRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -31,6 +33,15 @@ public class InventoryGraphQlController {
     @QueryMapping
     public InventoryItem inventoryItemBySku(@Argument String sku) {
         return inventoryItemRepository.findBySku(sku).orElse(null);
+    }
+
+    @MutationMapping
+    public InventoryItem updateInventoryQuantity(@Argument Long id, @Argument Integer quantity) {
+        InventoryItem item = inventoryItemRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Inventory item not found"));
+        item.setQuantity(quantity);
+        item.setUpdatedAt(LocalDateTime.now());
+        return inventoryItemRepository.save(item);
     }
 
     @SchemaMapping(typeName = "InventoryItem", field = "unitCost")

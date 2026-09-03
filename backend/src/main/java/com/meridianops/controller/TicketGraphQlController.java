@@ -3,10 +3,12 @@ package com.meridianops.controller;
 import com.meridianops.entity.Ticket;
 import com.meridianops.repository.TicketRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -26,6 +28,15 @@ public class TicketGraphQlController {
     @QueryMapping
     public Ticket ticket(@Argument Long id) {
         return ticketRepository.findById(id).orElse(null);
+    }
+
+    @MutationMapping
+    public Ticket updateTicketStatus(@Argument Long id, @Argument String status) {
+        Ticket ticket = ticketRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Ticket not found"));
+        ticket.setStatus(status);
+        ticket.setUpdatedAt(LocalDateTime.now());
+        return ticketRepository.save(ticket);
     }
 
     @SchemaMapping(typeName = "Ticket", field = "createdAt")
